@@ -479,7 +479,7 @@ form button:hover {
 }
 
 .footer-container {
-  max-width: 1200px;
+ 
   margin: 0 auto;
   padding: 0 2rem;
   display: grid;
@@ -491,6 +491,7 @@ form button:hover {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  justify-content: center;
 }
 
 .footer-logo {
@@ -530,11 +531,11 @@ form button:hover {
   color: #94a3b8;
   text-decoration: none;
   transition: color 0.3s ease;
-  font-size: 0.9rem;
+  font-size: 1.2rem;
 }
 
 .footer-section ul li a:hover {
-  color: #fff;
+  color: #059669;
 }
 
 .footer-section .flag {
