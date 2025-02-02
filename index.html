@@ -9,7 +9,8 @@
     <!-- Fonts Awesome -->
     <script src="https://kit.fontawesome.com/2cffc479ad.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/6.6.6/css/flag-icons.min.css">
-    
+    <!-- bootstrap -->
+     
      <!-- Owl Carousel CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
@@ -21,20 +22,52 @@
     
     <nav>
         <div class="logo">
-          <img src="./assets/images/logo-neurona-rem.png" alt="Logo Neurona">
+            <img src="./assets/images/logo-neurona-rem.png" alt="Logo Neurona">
         </div>
         <div class="nav-center expand-from-center">
-          <a href="#hero">Home</a>
-          <a href="#card-section">About us</a>
-          <a href="#services">Services</a>
-          <a>Success Cases</a>
-          <a href="#partners-section">Partners</a>
+            <a href="#hero">Home</a>
+            <a href="#card-section">About us</a>
+            <a href="#services">Services</a>
+            <a href="#success-cases">Success Cases</a>
+            <a href="#partners-section">Partners</a>
         </div>
         <div class="nav-right">
-          <button class="login-btn">Log In</button>
-          <a href="#contact" class="get-started">Contact Us</a>
+            <div class="dropdown">
+                <button class="login-btn">Solutions ▼</button>
+                <div class="dropdown-content">
+                    <a href="#" data-solution="escala">AI CRM</a>
+                    <a href="#" data-solution="solution2">Smart Coders</a>
+                    <a href="#" data-solution="solution3">Data Integration</a>
+                </div>
+            </div>
+            <a href="#contact" class="get-started">Contact Us</a>
         </div>
     </nav>
+    
+    <!-- Modal -->
+    <div class="modal" id="solutionModal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="modal-body">
+                <div class="modal-left">
+                    <img id="modalLogo" src="./assets/images/escala-rem.png" alt="Solution Logo">
+                    <h2 id="modalTitle">Escala</h2>
+                    <p id="modalDescription">The CRM with AI, WhatsApp, and integrated marketing tools to sell more and better. Promote your services and multiply your sales with a CRM that's truly easy to use.</p>
+                </div>
+                <div class="modal-right">
+                    <h3>Request a Demo Now!!!</h3>
+                    <form id="demoForm">
+                        <input type="text" placeholder="Name" required>
+                        <input type="text" placeholder="Last Name" required>
+                        <input type="text" placeholder="Company (Optional)">
+                        <input type="email" placeholder="Email" required>
+                        <textarea placeholder="Message" rows="4"></textarea>
+                        <button type="submit" class="send-message">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <section class="hero-section" id="hero">
         <h1 class="tracking-in-contract-bck-bottom">Revolutionizing Business <br> with Innovative Solutions</h1>
@@ -264,7 +297,7 @@
                             <li><a href="#hero">Home</a></li>
                             <li><a href="#card-section">About</a></li>
                             <li><a href="#services">Services</a></li>
-                            <li><a href="#">Success Cases</a></li>
+                            <li><a href="#success-cases">Success Cases</a></li>
                             <li><a href="#partners-section">Partners</a></li>
                         </ul>
                     </div>
@@ -320,5 +353,6 @@
     <script src="./assets/js/custom.js"></script>
     <script src="./assets/js/particles.min.js"></script>
     <script src="./assets/js/carousel.js"></script>
+    <script src="./assets/js/dropModal.js"></script>
 </body>
 </html>
