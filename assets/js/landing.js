@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const contactHeader = contactSection.querySelector(".header");
   const contactForm = contactSection.querySelector(".form-container");
   const footer = document.querySelector('.footer');
+  const swingSection = document.getElementById('partners-section');
 
   // Set initial states
   cards.forEach((card, index) => {
@@ -115,10 +116,26 @@ document.addEventListener("DOMContentLoaded", function () {
     threshold: 0.05, // Reducimos el threshold para que comience más pronto
     rootMargin: '50px' // Añadimos un margen para detectar antes el footer
 });
+const swingObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+      if (entry.isIntersecting) {
+          entry.target.classList.add('swing-in-top-fwd');
+      } else {
+          // Esperamos a que la animación termine antes de remover la clase
+          setTimeout(() => {
+              entry.target.classList.remove('swing-in-top-fwd');
+          }, 1000); // Ajusta este valor según la duración de tu animación
+      }
+  });
+}, {
+  threshold: 0.05,
+  rootMargin: '50px'
+});
 
   // Start observing all sections
   if (heroSection) heroObserver.observe(heroSection);
   if (cardSection) cardSectionObserver.observe(cardSection);
   if (contactSection) contactObserver.observe(contactSection);
+  if (swingSection) swingObserver.observe(swingSection);
   if (footer) footerObserver.observe(footer);
 });

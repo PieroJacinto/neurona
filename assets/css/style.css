@@ -618,47 +618,51 @@ form button:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 4rem;
+  gap: 3rem;
   flex-wrap: wrap;
-  margin-bottom: 6rem;
+  margin-bottom: 8rem;
 }
 
+
 .partner-logo {
-  height: 40px;
+  width: 180px;
+  height: 80px;
+  object-fit: contain;
   filter: brightness(0) invert(1);
-  opacity: 0.9;
-  transition: opacity 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .partner-logo:hover {
-  opacity: 1;
+  transform: scale(1.1);
+  filter: brightness(0) saturate(100%) invert(32%) sepia(93%) saturate(1352%) hue-rotate(135deg) brightness(96%) contrast(101%);
 }
 
+
 .frameworks-header {
-  max-width: 800px;
-  margin: 0 auto 3rem;
+  max-width: 1000px;
+  margin: 0 auto 4rem;
   text-align: center;
 }
 
 .frameworks-title {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
+  font-size: 3.5rem;
+  margin-bottom: 1.5rem;
   line-height: 1.2;
 }
 
 .frameworks-subtitle {
   color: #94a3b8;
-  font-size: 1.1rem;
+  font-size: 1.4rem;
   line-height: 1.5;
 }
 
 .frameworks-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  padding: 2rem;
-  background: rgba(2, 6, 23, 0.5);
-  border-radius: 1rem;
+  gap: 3rem;
+  padding: 3rem;
+  background: rgba(2, 6, 23, 0.1);
+  border-radius: 1.5rem;
   backdrop-filter: blur(10px);
 }
 
@@ -667,32 +671,60 @@ form button:hover {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 2rem;
+  padding: 3rem 2rem;
   background: rgba(30, 41, 59, 0.3);
-  border-radius: 0.75rem;
+  border-radius: 1rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
   transition: transform 0.3s ease;
+  cursor: pointer;
 }
 
 .framework-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-8px);
 }
-
+.framework-card:hover .framework-logo {
+  transform: scale(1.1);
+}
 .framework-logo {
-  width: 60px;
-  height: 60px;
-  margin-bottom: 1.5rem;
-  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  margin-bottom: 2rem;  
+  transition: transform 0.3s ease;
 }
 
 .framework-title {
-  font-size: 1.25rem;
-  margin-bottom: 1rem;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
   font-weight: 500;
 }
 
 .framework-description {
   color: #94a3b8;
-  font-size: 0.95rem;
-  line-height: 1.5;
+  font-size: 1.2rem;
+  line-height: 1.6;
 }
+
+.swing-in-top-fwd {
+	-webkit-animation: swing-in-top-fwd 3s cubic-bezier(0.175, 0.885, 0.320, 1.275) both;
+	        animation: swing-in-top-fwd 3s cubic-bezier(0.175, 0.885, 0.320, 1.275) both;
+}
+
+
+ @-webkit-keyframes swing-in-top-fwd {
+  0% {
+    -webkit-transform: rotateX(-100deg);
+            transform: rotateX(-100deg);
+    -webkit-transform-origin: top;
+            transform-origin: top;
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: rotateX(0deg);
+            transform: rotateX(0deg);
+    -webkit-transform-origin: top;
+            transform-origin: top;
+    opacity: 1;
+  }
+}
+
+
