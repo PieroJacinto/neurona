@@ -8,7 +8,7 @@ particlesJS("particles-js", {
       }
     },
     "color": {
-      "value": "#00b3b3" // Color turquesa
+      "value": "#059669" // Color turquesa
     },
     "shape": {
       "type": "circle",
@@ -40,7 +40,7 @@ particlesJS("particles-js", {
     "line_linked": {
       "enable": true,
       "distance": 250, // Mayor distancia entre conexiones
-      "color": "#00b3b3", // Color turquesa para las líneas
+      "color": "#059669", // Color turquesa para las líneas
       "opacity": 0.2, // Más sutil
       "width": 1
     },
