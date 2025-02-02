@@ -1,4 +1,3 @@
-// Enhanced animation script for both hero and cards sections
 document.addEventListener("DOMContentLoaded", function () {
   const scrollButton = document.getElementById("scrollButton");
   const cardSection = document.getElementById("card-section");
@@ -8,96 +7,88 @@ document.addEventListener("DOMContentLoaded", function () {
   const heroSubtitle = heroSection.querySelector(".subtitle");
   const ctaButton = heroSection.querySelector(".cta-button");
 
-  // Function to reset animation
-  function resetAnimation(element) {
-    element.style.animation = 'none';
-    element.offsetHeight; // Trigger reflow
-    element.style.animation = null;
+  // Set initial states
+  cards.forEach((card, index) => {
+    if (index % 2 === 0) {
+      card.style.transform = 'translateX(-100%)';
+    } else {
+      card.style.transform = 'translateX(100%)';
+    }
+    card.style.opacity = '0';
+    card.style.transition = 'all 1s ease';
+  });
+
+  function showCard(card, index) {
+    setTimeout(() => {
+      card.style.transform = 'translateX(0)';
+      card.style.opacity = '1';
+    }, index * 200);
   }
 
-  // Function to animate hero elements
+  function hideCard(card, index) {
+    card.style.opacity = '0';
+    if (index % 2 === 0) {
+      card.style.transform = 'translateX(-100%)';
+    } else {
+      card.style.transform = 'translateX(100%)';
+    }
+  }
+
   function animateHero() {
-    // Reset and replay animations for each hero element
-    const elements = [heroTitle, heroSubtitle, ctaButton];
-    
-    elements.forEach((element, index) => {
-      if (element) {
-        resetAnimation(element);
-        void element.offsetWidth; // Force reflow
-        
-        // Remove existing animation classes
-        element.classList.remove("animate");
-        
-        // Add animations with delays
-        setTimeout(() => {
-          if (element === heroTitle) {
-            element.style.animation = 'tracking-in-contract-bck-bottom 1s cubic-bezier(.215,.61,.355,1.000) both';
-          } else if (element === heroSubtitle) {
-            element.style.animation = 'fadeInUp 0.7s ease forwards';
-          } else if (element === ctaButton) {
-            element.style.animation = 'fadeInUp 0.7s ease forwards, bounce 1.5s infinite ease-in-out';
-          }
-        }, index * 300); // 300ms delay between each element
-      }
-    });
-  }
+    // Reset hero animations
+    heroTitle.style.animation = 'none';
+    heroSubtitle.style.animation = 'none';
+    ctaButton.style.animation = 'none';
 
-  // Function to handle card animations
-  function animateCards() {
-    cards.forEach((card, index) => {
-      resetAnimation(card);
-      card.classList.remove("animate");
-      void card.offsetWidth;
-      setTimeout(() => {
-        card.classList.add("animate");
-      }, index * 200);
-    });
+    void heroTitle.offsetHeight; // Force reflow
+
+    // Start animations
+    heroTitle.style.animation = 'tracking-in-contract-bck-bottom 1s cubic-bezier(.215,.61,.355,1.000) both';
+    setTimeout(() => {
+      heroSubtitle.style.animation = 'fadeInUp 0.7s ease forwards';
+    }, 300);
+    setTimeout(() => {
+      ctaButton.style.animation = 'fadeInUp 0.7s ease forwards, bounce 1.5s infinite ease-in-out';
+    }, 600);
   }
 
   // Scroll button handler
   if (scrollButton && cardSection) {
-    scrollButton.addEventListener("click", function () {
+    scrollButton.addEventListener("click", () => {
+      // First hide all cards
+      cards.forEach((card, index) => hideCard(card, index));
+      
+      // Scroll to section
       cardSection.scrollIntoView({ behavior: "smooth" });
-      setTimeout(animateCards, 500);
+      
+      // Show cards after scroll
+      setTimeout(() => {
+        cards.forEach((card, index) => showCard(card, index));
+      }, 500);
     });
   }
 
-  // Create observers for both hero and card sections
-  const heroObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          animateHero();
-        }
-      });
-    },
-    { 
-      threshold: 0.5
-    }
-  );
+  // Create Intersection Observer for hero section
+  const heroObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateHero();
+      }
+    });
+  }, { threshold: 0.5 });
 
-  const cardsObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const card = entry.target;
-          resetAnimation(card);
-          card.classList.add("animate");
-        } else {
-          entry.target.classList.remove("animate");
-        }
-      });
-    },
-    { 
-      threshold: 0.3
-    }
-  );
+  // Create Intersection Observer for card section
+  const cardSectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        cards.forEach((card, index) => showCard(card, index));
+      } else {
+        cards.forEach((card, index) => hideCard(card, index));
+      }
+    });
+  }, { threshold: 0.2 });
 
-  // Observe hero section
+  // Start observing
   heroObserver.observe(heroSection);
-
-  // Observe all cards
-  cards.forEach(card => {
-    cardsObserver.observe(card);
-  });
+  cardSectionObserver.observe(cardSection);
 });
