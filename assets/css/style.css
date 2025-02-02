@@ -587,7 +587,7 @@ form button:hover {
 @keyframes slideFromBottom {
   from {
     opacity: 0;
-    transform: translateY(200px); /* Aumentamos la distancia inicial */
+    transform: translateY(200px); 
   }
   to {
     opacity: 1;
@@ -597,8 +597,102 @@ form button:hover {
 
 .animate-from-bottom {
   animation: slideFromBottom 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  /* 
-    - Aumentamos la duración a 1.5s
-    - Usamos un cubic-bezier que da una sensación más suave y gradual
-  */
+ 
+}
+
+/* partners */
+.partners-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+
+.partners-section h2 {
+  font-size: 3.5rem;
+  text-align: center;
+  margin-bottom: 4rem;
+  font-weight: 500;
+}
+
+.partners-logos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4rem;
+  flex-wrap: wrap;
+  margin-bottom: 6rem;
+}
+
+.partner-logo {
+  height: 40px;
+  filter: brightness(0) invert(1);
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+}
+
+.partner-logo:hover {
+  opacity: 1;
+}
+
+.frameworks-header {
+  max-width: 800px;
+  margin: 0 auto 3rem;
+  text-align: center;
+}
+
+.frameworks-title {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.frameworks-subtitle {
+  color: #94a3b8;
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+.frameworks-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  padding: 2rem;
+  background: rgba(2, 6, 23, 0.5);
+  border-radius: 1rem;
+  backdrop-filter: blur(10px);
+}
+
+.framework-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+  background: rgba(30, 41, 59, 0.3);
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.framework-card:hover {
+  transform: translateY(-5px);
+}
+
+.framework-logo {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 1.5rem;
+  border-radius: 50%;
+}
+
+.framework-title {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.framework-description {
+  color: #94a3b8;
+  font-size: 0.95rem;
+  line-height: 1.5;
 }
