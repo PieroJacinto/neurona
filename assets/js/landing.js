@@ -6,6 +6,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const heroTitle = heroSection.querySelector("h1");
   const heroSubtitle = heroSection.querySelector(".subtitle");
   const ctaButton = heroSection.querySelector(".cta-button");
+  const contactSection = document.getElementById("contact");
+  const contactHeader = contactSection.querySelector(".header");
+  const contactForm = contactSection.querySelector(".form-container");
+  const footer = document.querySelector('.footer');
 
   // Set initial states
   cards.forEach((card, index) => {
@@ -17,6 +21,13 @@ document.addEventListener("DOMContentLoaded", function () {
     card.style.opacity = '0';
     card.style.transition = 'all 1s ease';
   });
+
+  // Set initial state for footer
+  if (footer) {
+    footer.style.opacity = '0';
+    footer.style.transform = 'translateY(50px)';
+    footer.style.transition = 'all 1s ease';
+  }
 
   function showCard(card, index) {
     setTimeout(() => {
@@ -35,14 +46,12 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function animateHero() {
-    // Reset hero animations
     heroTitle.style.animation = 'none';
     heroSubtitle.style.animation = 'none';
     ctaButton.style.animation = 'none';
 
-    void heroTitle.offsetHeight; // Force reflow
+    void heroTitle.offsetHeight;
 
-    // Start animations
     heroTitle.style.animation = 'tracking-in-contract-bck-bottom 1s cubic-bezier(.215,.61,.355,1.000) both';
     setTimeout(() => {
       heroSubtitle.style.animation = 'fadeInUp 0.7s ease forwards';
@@ -55,20 +64,15 @@ document.addEventListener("DOMContentLoaded", function () {
   // Scroll button handler
   if (scrollButton && cardSection) {
     scrollButton.addEventListener("click", () => {
-      // First hide all cards
       cards.forEach((card, index) => hideCard(card, index));
-      
-      // Scroll to section
       cardSection.scrollIntoView({ behavior: "smooth" });
-      
-      // Show cards after scroll
       setTimeout(() => {
         cards.forEach((card, index) => showCard(card, index));
       }, 500);
     });
   }
 
-  // Create Intersection Observer for hero section
+  // Create all observers
   const heroObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -77,7 +81,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }, { threshold: 0.5 });
 
-  // Create Intersection Observer for card section
   const cardSectionObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -88,7 +91,33 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }, { threshold: 0.2 });
 
-  // Start observing
-  heroObserver.observe(heroSection);
-  cardSectionObserver.observe(cardSection);
+  const contactObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        contactHeader.classList.add('animate-from-left');
+        contactForm.classList.add('animate-from-right');
+      } else {
+        contactHeader.classList.remove('animate-from-left');
+        contactForm.classList.remove('animate-from-right');
+      }
+    });
+  }, { threshold: 0.2 });
+
+  const footerObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      } else {
+        entry.target.style.opacity = '0';
+        entry.target.style.transform = 'translateY(50px)';
+      }
+    });
+  }, { threshold: 0.2 });
+
+  // Start observing all sections
+  if (heroSection) heroObserver.observe(heroSection);
+  if (cardSection) cardSectionObserver.observe(cardSection);
+  if (contactSection) contactObserver.observe(contactSection);
+  if (footer) footerObserver.observe(footer);
 });
