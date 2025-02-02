@@ -584,3 +584,21 @@ form button:hover {
       padding: 0 1rem;
   }
 }
+@keyframes slideFromBottom {
+  from {
+    opacity: 0;
+    transform: translateY(200px); /* Aumentamos la distancia inicial */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-from-bottom {
+  animation: slideFromBottom 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  /* 
+    - Aumentamos la duración a 1.5s
+    - Usamos un cubic-bezier que da una sensación más suave y gradual
+  */
+}

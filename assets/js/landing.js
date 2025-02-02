@@ -105,15 +105,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const footerObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = '1';
-        entry.target.style.transform = 'translateY(0)';
-      } else {
-        entry.target.style.opacity = '0';
-        entry.target.style.transform = 'translateY(50px)';
-      }
+        if (entry.isIntersecting) {
+            entry.target.classList.add('animate-from-bottom');
+        } else {
+            entry.target.classList.remove('animate-from-bottom');
+        }
     });
-  }, { threshold: 0.2 });
+}, { 
+    threshold: 0.05, // Reducimos el threshold para que comience más pronto
+    rootMargin: '50px' // Añadimos un margen para detectar antes el footer
+});
 
   // Start observing all sections
   if (heroSection) heroObserver.observe(heroSection);
